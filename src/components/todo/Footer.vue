@@ -4,7 +4,11 @@
     </footer>
 </template>
 
-
+<script>
+export default {
+    name: "FooterSection"
+}
+</script>
 <style>
 footer {
     height: 20vh;

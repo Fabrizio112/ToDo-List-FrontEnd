@@ -43,7 +43,7 @@
 </template>
 <script>
 export default {
-    name: "Modal",
+    name: "ModalSection",
     props: ["close", "data", "add", "user_edit", "edit", "changeUser"],
     methods: {
         handleClose() {

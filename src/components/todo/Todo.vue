@@ -6,7 +6,7 @@
             <div id="todos" class="mt-5">
                 <template v-if="todos">
                     <template v-for="todo in todos" :key=todo.id>
-                        <IndividualTodo :data=todo :delete=delete :changeEdit=changeEdit />
+                        <IndividualTodo :data=todo :delete=this.delete :changeEdit=changeEdit />
                     </template>
                 </template>
             </div>
@@ -17,7 +17,7 @@
 <script>
 import IndividualTodo from './IndividualTodo.vue';
 export default {
-    name: "Todo",
+    name: "ToDo",
     props: ["changeModal", "data", "todos", "delete", "changeEdit"],
     methods: {
         handleModal() {

@@ -57,7 +57,7 @@ nav {
 
 <script>
 export default {
-    name: "NavBar",
+    name: "NavBarSection",
     props: ["logout", "data"],
     methods: {
         handleDelete() {

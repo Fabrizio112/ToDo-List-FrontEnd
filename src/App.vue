@@ -31,18 +31,11 @@ export default {
       this.login = window.sessionStorage.getItem("login")
     }, async obtenerInformacionUsuario(email) {
       try {
-        let response = await fetch(`https://fabrizioavila1.pythonanywhere.com/user/${email}`)
+        let response = await fetch(`https://fabrizioavila1.pythonanywhere.com/users/${email}`)
         let data = await response.json()
         window.sessionStorage.setItem("user_data", JSON.stringify(data))
       } catch (error) {
-        console.error(err)
-      }
-    }
-  },
-  watch: {
-    login(nuevoValor) {
-      if (nuevoValor === true) {
-
+        console.error(error)
       }
     }
   }

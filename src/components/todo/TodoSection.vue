@@ -1,18 +1,18 @@
 <template>
-    <NavBar :logout=logout :data=data_user />
-    <Todo :changeModal=changeModal :data=data_user :todos=todos :delete=deleteTodo :changeEdit=changeUserEdit />
+    <NavBarSection :logout=logout :data=data_user />
+    <ToDo :changeModal=changeModal :data=data_user :todos=todos :delete=deleteTodo :changeEdit=changeUserEdit />
     <template v-if="modal === true">
-        <Modal :close=changeModal :data=data_user :add=addTodo :user_edit=user_edit :edit=editTodo
+        <ModalSection :close=changeModal :data=data_user :add=addTodo :user_edit=user_edit :edit=editTodo
             :changeUser=changeUserEdit />
     </template>
-    <Footer />
+    <FooterSection />
 </template>
 
 <script>
-import NavBar from './NavBar.vue';
-import Footer from './Footer.vue';
-import Modal from './Modal.vue';
-import Todo from './Todo.vue'
+import NavBarSection from './NavBar.vue';
+import FooterSection from './Footer.vue';
+import ModalSection from './Modal.vue';
+import ToDo from './Todo.vue'
 export default {
     name: "TodoSection",
     props: ["logout"],
@@ -24,10 +24,10 @@ export default {
             user_edit: ""
         }
     }, components: {
-        NavBar,
-        Footer,
-        Todo,
-        Modal
+        NavBarSection,
+        FooterSection,
+        ToDo,
+        ModalSection
     },
     methods: {
         changeModal() {
