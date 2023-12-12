@@ -11,7 +11,7 @@
             <p>{{ data.description }}</p>
         </div>
         <div class="col" id="todo-date-container">
-            <span>{{ data.fecha }}</span>
+            <span>{{ data.fecha.split("T")[0] }}</span><span class="mx-3">{{ data.fecha.split("T")[1] }}</span>
         </div>
     </div>
 </template>
