@@ -1,13 +1,14 @@
 <template>
     <nav class="d-flex justify-content-between aling-items-center ">
-        <div id="nav-title" class="d-flex justify-content-center align-items-center">
+        <div id="nav-title" class="d-flex justify-content-center gap-5 align-items-center">
+            <img src="../../../public/nota.png" alt="notas">
             <h1 class="display-4">To-Do App</h1>
         </div>
         <div id="nav-user" class="d-flex justify-content-between align-items-center gap-4">
             <div id="nav-user-avatar">
             </div>
             <div id="nav-user-info">
-                <p>{{ data ? data.name : "" }}</p>
+                <h2 class="fs-5 d-flex gap-2">Hola <p>{{ data ? data.name : "" }}</p>!! </h2>
                 <p>@{{ data ? data.username : "" }}</p>
                 <div><button class="btn btn-danger" @click=handleDelete>Cerrar Sesion</button></div>
             </div>
@@ -25,6 +26,10 @@ nav {
 
 #nav-title {
     width: 75%;
+}
+
+#nav-title img {
+    height: 100%;
 }
 
 #nav-user {

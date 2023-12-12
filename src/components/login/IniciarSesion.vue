@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="mb-3 mt-2 fs-2 ">Iniciar Sesion</h1>
+        <h1 class="mb-4 mt-2 fs-2 ">Iniciar Sesion</h1>
         <form action="" class="gap-4 d-flex flex-column" @submit="handleLogin">
             <div>
                 <input type="email" placeholder="Correo Electronico" name="email" class="form-control py-2" required>

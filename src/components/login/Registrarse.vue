@@ -1,6 +1,6 @@
 <template>
     <div id="form-register">
-        <h1 class="mb-3 mt-2 fs-2 ">Registrarse</h1>
+        <h1 class="mb-4 mt-2 fs-2 ">Crea una cuenta</h1>
         <form action="" class="gap-4 d-flex flex-column" @submit="handleRegister">
             <div class="row">
                 <div class="col">

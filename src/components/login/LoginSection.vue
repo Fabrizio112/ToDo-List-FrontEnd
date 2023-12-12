@@ -1,16 +1,39 @@
 <template>
     <main id="main-login" class="w-100 d-flex justify-content-center align-items-center">
-        <div id="login-container">
-            <section class="d-flex justify-content-center align-items-center gap-2 " id="section-buttons">
-                <button class="btn btn-primary w-100 py-2" @click="handleChangeBoton">Iniciar Sesion</button>
-                <button class="btn btn-dark w-100 py-2" @click="handleChangeBoton">Registrarse</button>
+        <div id="login-container" class="d-flex">
+            <section id="login-container-img">
+                <template v-if="botonClickeado === 'Iniciar Sesion'">
+                    <img src="../../../public/login.jpg" alt="photo login">
+                </template>
+                <template v-else>
+                    <img src="../../../public/register.jpg" alt="photo register">
+                </template>
             </section>
-            <div v-if="botonClickeado === 'Iniciar Sesion'">
-                <IniciarSesion :login=loginUser />
-            </div>
-            <div v-else>
-                <Registrarse :registrar=signUpUser />
-            </div>
+
+            <section id="login-container-content">
+                <section id="logo-section" class="d-flex gap-3">
+                    <img src="../../../public/nota.png" alt="">
+                    <h1>To Do App</h1>
+                </section>
+                <section id="content-section" class="d-flex flex-column justify-content-around">
+                    <div v-if="botonClickeado === 'Iniciar Sesion'">
+                        <IniciarSesion :login=loginUser />
+                    </div>
+                    <div v-else>
+                        <Registrarse :registrar=signUpUser />
+                    </div>
+                    <section v-if="botonClickeado === 'Iniciar Sesion'">
+                        <p>No tienes una cuenta? <button @click="handleChangeBoton" class="boton-login">Registrarse</button>
+                        </p>
+                    </section>
+                    <section v-else>
+                        <p>Ya tienes una cuenta? <button @click="handleChangeBoton" class="boton-login">Iniciar
+                                Sesion</button></p>
+                    </section>
+                </section>
+
+            </section>
+
 
         </div>
     </main>
@@ -95,16 +118,54 @@ export default {
     min-height: 100vh;
 }
 
+#logo-section img {
+    width: 50px;
+    height: 50px;
+
+}
+
+#logo-section {
+    height: 10%;
+}
+
+#content-section {
+    height: 90%;
+}
+
 #login-container {
-    width: 500px;
-    height: 450px;
+    width: 90%;
+    height: 600px;
     border-radius: 15px;
-    color: white;
+    color: black;
+    background-color: white;
+}
+
+#login-container-img,
+#login-container-content {
+    width: 50%;
+    height: 100%;
+}
+
+#login-container-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#login-container-content {
     padding: 2rem;
-    background-color: #ffffff54;
 }
 
 #section-buttons {
     height: 20%;
+}
+
+.boton-login {
+    background-color: transparent;
+    border: none;
+    font-weight: 900;
+    cursor: pointer;
 }
 </style>
