@@ -17,10 +17,12 @@
                 </section>
                 <section id="content-section" class="d-flex flex-column justify-content-around">
                     <div v-if="botonClickeado === 'Iniciar Sesion'">
-                        <IniciarSesion :login=loginUser />
+                        <IniciarSesion :login=loginUser :error=errorIniciarSesion :loader=loadingIniciarSesion
+                            :modal=modalIniciarSesion />
                     </div>
                     <div v-else>
-                        <Registrarse :registrar=signUpUser />
+                        <Registrarse :registrar=signUpUser :loader=loadingRegistro :modal=modalRegistro
+                            :mensaje=mensageRegistro />
                     </div>
                     <section v-if="botonClickeado === 'Iniciar Sesion'">
                         <p>No tienes una cuenta? <button @click="handleChangeBoton" class="boton-login">Registrarse</button>
@@ -33,8 +35,6 @@
                 </section>
 
             </section>
-
-
         </div>
     </main>
 </template>
@@ -42,6 +42,7 @@
 <script>
 import Registrarse from './Registrarse.vue';
 import IniciarSesion from './IniciarSesion.vue'
+
 export default {
     name: "LoginForm",
     props: ["actualizar_login", "data"],
@@ -50,6 +51,13 @@ export default {
             botonClickeado: "Iniciar Sesion",
             urlSignUp: "https://fabrizioavila1.pythonanywhere.com/signup",
             urlLogin: "https://fabrizioavila1.pythonanywhere.com/login",
+            errorIniciarSesion: false,
+            loadingIniciarSesion: false,
+            loadingRegistro: false,
+            modalIniciarSesion: false,
+            modalRegistro: false,
+            mensageRegistro: ""
+
         }
     },
     components: {
@@ -61,6 +69,7 @@ export default {
             this.botonClickeado = e.target.innerText
         },
         signUpUser(user) {
+            this.loadingRegistro = true
             let options = {
                 body: JSON.stringify(user),
                 method: 'POST',
@@ -69,10 +78,20 @@ export default {
             fetch(this.urlSignUp, options)
                 .then(response => {
                     if (response.status === 401) {
-                        alert("Correo Electronico ya en uso")
+                        this.modalRegistro = true
+                        this.mensageRegistro = "😕 Correo Electronico ya en uso"
+                        this.loadingRegistro = false
+                        setTimeout(() => {
+                            this.modalRegistro = false
+                        }, 700);
                     } else if (response.status === 200) {
-                        alert("Usuario Registrado Correctamente")
-                        this.botonClickeado = "Iniciar Sesion"
+                        this.loadingRegistro = false
+                        this.mensageRegistro = "💪 Usuario Registrado Correctamente"
+                        this.modalRegistro = true
+                        setTimeout(() => {
+                            this.modalRegistro = false
+                            this.botonClickeado = "Iniciar Sesion"
+                        }, 700);
                     }
                 })
 
@@ -87,16 +106,26 @@ export default {
                 headers: { 'Content-Type': 'application/json' }
             }
             try {
+                this.loadingIniciarSesion = true
                 let response = await fetch(this.urlLogin, options)
                 if (response.status === 401) {
-                    alert("Correo Electrónico o Contraseña incorrectos")
+                    this.errorIniciarSesion = true
+                    this.loadingIniciarSesion = false
                 } else if (response.status === 200) {
-                    alert("Inicio de Sesion Exitoso")
+                    this.modalIniciarSesion = true
+                    this.errorIniciarSesion = false
                     window.sessionStorage.setItem("login", true)
                     await this.data(user.email)
-                    this.actualizar_login()
+                    this.loadingIniciarSesion = false
+                    setTimeout(() => {
+                        this.actualizar_login()
+                    }, 500);
+
+
                 }
             } catch (error) {
+                this.loadingIniciarSesion = false
+                this.errorIniciarSesion = true
                 console.error(error)
             }
         }
@@ -116,6 +145,7 @@ export default {
 
 #main-login {
     min-height: 100vh;
+    position: relative;
 }
 
 #logo-section img {

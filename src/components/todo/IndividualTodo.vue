@@ -1,5 +1,5 @@
 <template>
-    <div class="row" id="individual-todo">
+    <div class="row w-100" id="individual-todo">
         <div class="col-6 d-flex justify-content-center align-items-center gap-3" id="todo-buttons-container">
             <button class="boton-todo bg-primary" @click="handleEdit"><i class="fa-solid fa-pen-to-square fa-2xl"
                     style="color:white"></i></button>

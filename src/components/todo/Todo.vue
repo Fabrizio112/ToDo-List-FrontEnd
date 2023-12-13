@@ -1,6 +1,6 @@
 <template>
     <main>
-        <button class="btn btn-dark btn-lg p-3 my-4" id="añadir-todo" @click=handleModal>Añadir Tarea</button>
+        <button class="btn btn-dark btn-lg p-3 my-4 fs-4" id="añadir-todo" @click=handleModal>Añadir Tarea</button>
         <div id="todos-container">
             <h1 class="w-100 text-start text-decoration-underline">Tareas Pendientes:</h1>
             <div id="todos" class="mt-5">
@@ -40,7 +40,7 @@ export default {
 <style>
 main {
     min-height: 100vh;
-    padding: 1rem 2rem;
+    padding: 2rem;
     height: auto;
 }
 
@@ -51,6 +51,7 @@ main {
 #todos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    place-items: center;
     gap: 4rem;
     width: 100%;
     height: 100%;

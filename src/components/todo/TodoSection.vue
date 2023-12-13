@@ -6,6 +6,12 @@
             :changeUser=changeUserEdit />
     </template>
     <FooterSection />
+    <template v-if="loader === true">
+        <LoaderComponent />
+    </template>
+    <template v-if="modalAlert === true">
+        <ModalAlert :message=messageModal />
+    </template>
 </template>
 
 <script>
@@ -13,6 +19,8 @@ import NavBarSection from './NavBar.vue';
 import FooterSection from './Footer.vue';
 import ModalSection from './Modal.vue';
 import ToDo from './Todo.vue'
+import LoaderComponent from '../LoaderComponent.vue';
+import ModalAlert from '../ModalAlert.vue';
 export default {
     name: "TodoSection",
     props: ["logout"],
@@ -21,13 +29,18 @@ export default {
             modal: false,
             data_user: JSON.parse(window.sessionStorage.getItem("user_data")),
             todos: [],
-            user_edit: ""
+            user_edit: "",
+            loader: false,
+            modalAlert: false,
+            messageModal: ""
         }
     }, components: {
         NavBarSection,
         FooterSection,
         ToDo,
-        ModalSection
+        ModalSection,
+        LoaderComponent,
+        ModalAlert
     },
     methods: {
         changeModal() {
@@ -42,11 +55,17 @@ export default {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             }
+            this.loader = true
             fetch("https://fabrizioavila1.pythonanywhere.com/todos", options)
                 .then(res => {
                     if (res.status === 200) {
-                        alert("Tarea agregada con exito")
-                        window.location.reload()
+                        this.loader = false
+                        this.modalAlert = true
+                        this.messageModal = "✅ Tarea agregada con exito"
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 700);
+
                     }
                 })
         }, getTodos(user_id) {
@@ -60,6 +79,7 @@ export default {
                     console.error(err)
                 })
         }, deleteTodo(idTodo) {
+            this.loader = true
             let options = {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' }
@@ -67,14 +87,19 @@ export default {
             fetch(`https://fabrizioavila1.pythonanywhere.com/todos/${idTodo}`, options)
                 .then(res => {
                     if (res.status === 200) {
-                        alert("Tarea eliminada correctamente")
-                        window.location.reload()
+                        this.loader = false
+                        this.modalAlert = true
+                        this.messageModal = "✅ Tarea eliminada correctamente"
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 700);
                     }
                 })
                 .catch(err => {
                     console.error(err)
                 })
         }, editTodo(idTodo, todo) {
+            this.loader = true
             let options = {
                 body: JSON.stringify(todo),
                 method: 'PUT',
@@ -83,8 +108,12 @@ export default {
             fetch(`https://fabrizioavila1.pythonanywhere.com/todos/${idTodo}`, options)
                 .then(res => {
                     if (res.status === 200) {
-                        alert("Tarea editada correctamente")
-                        window.location.reload()
+                        this.loader = false
+                        this.modalAlert = true
+                        this.messageModal = "✅ Tarea editada correctamente"
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 700);
                     }
                 })
                 .catch(err => {
