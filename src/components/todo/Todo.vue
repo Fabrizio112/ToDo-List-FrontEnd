@@ -4,6 +4,9 @@
         <div id="todos-container">
             <h1 class="w-100 text-start text-decoration-underline">Tareas Pendientes:</h1>
             <div id="todos" class="mt-5">
+                <template v-if="todos.length === 0">
+                    <h1>No hay tareas para realizar !!</h1>
+                </template>
                 <template v-if="todos">
                     <template v-for="todo in todos" :key=todo.id>
                         <IndividualTodo :data=todo :delete=this.delete :changeEdit=changeEdit />
@@ -22,11 +25,6 @@ export default {
     methods: {
         handleModal() {
             this.changeModal()
-        }
-    },
-    data() {
-        return {
-            ejemplo: { title: 'hola', description: "asdas", fecha: "Hoy", id: 3 }
         }
     },
     components: {

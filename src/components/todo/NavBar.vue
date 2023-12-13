@@ -21,7 +21,7 @@
 <style>
 nav {
     height: 20vh;
-    padding: 1rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     border-bottom: 3px solid white;
 }
 
@@ -54,7 +54,7 @@ nav {
     width: 40%;
     height: 100%;
     border-radius: 15px;
-    background-image: url("https://via.placeholder.com/100x100.png/a59090/000000?Text=100x100");
+    background-image: url("../../../public/default\ image.webp");
     background-size: cover;
     background-position: center;
 }
