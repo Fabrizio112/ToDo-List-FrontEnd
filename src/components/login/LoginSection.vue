@@ -49,8 +49,8 @@ export default {
     data() {
         return {
             botonClickeado: "Iniciar Sesion",
-            urlSignUp: "https://fabrizioavila1.pythonanywhere.com/signup",
-            urlLogin: "https://fabrizioavila1.pythonanywhere.com/login",
+            urlSignUp: "http://localhost:5000/signup",
+            urlLogin: "http://localhost:5000/login",
             errorIniciarSesion: false,
             loadingIniciarSesion: false,
             loadingRegistro: false,

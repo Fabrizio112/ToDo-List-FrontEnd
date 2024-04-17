@@ -56,7 +56,7 @@ export default {
                 headers: { 'Content-Type': 'application/json' }
             }
             this.loader = true
-            fetch("https://fabrizioavila1.pythonanywhere.com/todos", options)
+            fetch("http://localhost:5000/todos", options)
                 .then(res => {
                     if (res.status === 200) {
                         this.loader = false
@@ -69,7 +69,7 @@ export default {
                     }
                 })
         }, getTodos(user_id) {
-            fetch(`https://fabrizioavila1.pythonanywhere.com/todos/${user_id}`)
+            fetch(`http://localhost:5000/todos/${user_id}`)
                 .then(res => res.json())
                 .then(data => {
                     console.log(data)
@@ -84,7 +84,7 @@ export default {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(`https://fabrizioavila1.pythonanywhere.com/todos/${idTodo}`, options)
+            fetch(`http://localhost:5000/todos/${idTodo}`, options)
                 .then(res => {
                     if (res.status === 200) {
                         this.loader = false
@@ -105,7 +105,7 @@ export default {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' }
             }
-            fetch(`https://fabrizioavila1.pythonanywhere.com/todos/${idTodo}`, options)
+            fetch(`http://localhost:5000/todos/${idTodo}`, options)
                 .then(res => {
                     if (res.status === 200) {
                         this.loader = false
